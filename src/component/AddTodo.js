@@ -9,7 +9,7 @@ class AddTodo extends Component {
     this.state = {
       content: "",
       date: "",
-      due: null, // Add due date state
+      due: null,
     };
   }
 
@@ -52,6 +52,7 @@ class AddTodo extends Component {
           onChange={this.handleChange}
           value={this.state.content}
           aria-label="Add New Item"
+          data-testid="new-item-input"
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker

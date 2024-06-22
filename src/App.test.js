@@ -4,30 +4,31 @@ import App from './App';
 
 let container = null;
 beforeEach(() => {
-  // setup a DOM element as a render target
   container = document.createElement("div");
   document.body.appendChild(container);
 });
 
 afterEach(() => {
-  // cleanup on exiting
   unmountComponentAtNode(container);
   container.remove();
   container = null;
 });
 
-test('renders App component', () => {
+test('test that App component renders', () => {
   render(<App />, container);
+  const linkElement = screen.getByRole('heading', { name: /Todo's/i });
+  expect(linkElement).toBeInTheDocument();
 });
 
-test('new-item-button is a button element', () => {
+test('test that new-item-button is a button', () => {
   render(<App />, container);
   const element = screen.getByTestId('new-item-button');
-  expect(element.tagName.toLowerCase()).toBe('button');
+  expect(element.tagName.toLowerCase()).toBe("button");
 });
 
-test('new-item-input is an input element', () => {
+test('test that new-item-input is an input', () => {
   render(<App />, container);
-  const element = screen.getByLabelText('Add New Item');
-  expect(element.tagName.toLowerCase()).toBe('input');
+  const elements = screen.getAllByLabelText(/Add New Item/i);
+  const inputElement = elements.find(el => el.tagName.toLowerCase() === 'input');
+  expect(inputElement).toBeInTheDocument();
 });
